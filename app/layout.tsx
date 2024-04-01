@@ -5,11 +5,12 @@ import "./globals.css";
 import AuthProviders from "@/providers/AuthProviders";
 import AuthLoader from "@/shared/AuthLoader";
 import { useSession } from "next-auth/react";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TIC Portal",
+  title: "___",
   description: "next Generation of Tech",
 };
 
@@ -23,9 +24,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <AuthProviders>
+        <AuthProviders>
           <body className={inter.className}>{children}</body>
-      </AuthProviders>
+        </AuthProviders>
     </html>
   );
 }
