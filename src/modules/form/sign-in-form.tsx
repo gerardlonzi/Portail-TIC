@@ -1,78 +1,115 @@
 import { Button } from '@/components/ui/button'
-import FieldForm from '@/components/component-create/fieldForm'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Eye, EyeOff, Link } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
+import { LinkProps } from 'next/link'
 import React, { useState } from 'react'
-import { Form, useForm } from 'react-hook-form'
+import {  useForm } from 'react-hook-form'
+import { Form } from '@/components/ui/form'
 import { z } from 'zod'
-
+import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import Link from 'next/link'
 
 
 const formSchema = z.object({
-    username : z.string().min(2, {
-        message: "le nom doit comporter au moins 2 caracteres",
-      }),
-    email: z.string().email({
-    message: "email invalide",
+  username : z.string().min(2, {
+      message: "le nom doit comporter au moins 2 caracteres",
     }),
-    password: z.string().min(8, {
-      message: "le mot de passe doit comporter au moins 8 caracteres",
-    }),
-  })
+  email: z.string().email({
+  message: "email invalide",
+  }),
+  password: z.string().min(8, {
+    message: "le mot de passe doit comporter au moins 8 caracteres",
+  }),
+})
+
 
 const Sign_in_form = () => {
 
-    
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username:"",
-      email: "",
-      password: "",
-
-    },
-  })
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-
-    console.log(values)
-  }
-
-  const [isShowEye, setisShowEye] = useState(false)
-
-
-
-  function ClickEyes() {
-    setisShowEye(!isShowEye)
-  }
-  const inputType = isShowEye ? "text" : "password"
-
   
-  return (
-    <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FieldForm name='username' labelName='Username' placeholder='john Doe' form={form} />
-                <FieldForm name='email' inputType='email' labelName='Email' placeholder='johnDoe@gmail.com' form={form} />
-              
-              
-              <div className='relative'>
-              <FieldForm children={
-                     <span onClick={ClickEyes} className='absolute top-8  right-4'>
-                     {
-                       isShowEye ?
-                         <Eye className='text-gray-400 w-5' />
-                         :
-                         <EyeOff className='text-gray-400 w-5' />
-                     }
-                   </span>
+const form = useForm<z.infer<typeof formSchema>>({
+  resolver: zodResolver(formSchema),
+  defaultValues: {
+    username:"",
+    email: "",
+    password: "",
 
-              } name='password' inputType={inputType} labelName='Password' placeholder='78yrtlrt' form={form} />
-              </div>
-              <Link href={"/forgetpassword/Send-Mail"} className='flex items-end justify-end text-purple-600'>Mot de passe oublier?</Link>
-              <Button className='bg-purple-600 hover:bg-purple-800 block' type="submit">Submit</Button>
-            </form>
-          </Form>
-  )
+  },
+})
+
+function onSubmit(values: z.infer<typeof formSchema>) {
+
+  console.log(values)
+}
+
+const [isShowEye, setisShowEye] = useState(false)
+
+
+
+function ClickEyes() {
+  setisShowEye(!isShowEye)
+}
+const inputType = isShowEye ? "text" : "password"
+
+return (
+  
+            
+  <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+              control={form.control}
+              name="email"
+
+              render={({ field }) => (
+
+
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="johnDoe@gmail.com" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+
+              )}
+            />
+            <div className='relative'>
+
+              <FormField
+                control={form.control}
+                name="password"
+
+                render={({ field }) => (
+
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input type={inputType} {...field} />
+
+                    </FormControl>
+
+                    <FormMessage />
+                    <span onClick={ClickEyes} className='absolute top-8  right-4'>
+                      {
+                        isShowEye ?
+                        <Eye className='text-gray-400 w-5' />
+                        :
+                        <EyeOff className='text-gray-400 w-5' />
+                      }
+                    </span>
+                  </FormItem>
+
+                )}
+                
+                />
+                </div>
+            <Link href={"/forgetpassword/Send-Mail"} className='flex items-end justify-end text-purple-600'>Mot de passe oublier?</Link>
+            <Button className='bg-purple-600 hover:bg-purple-800 block' type="submit">Submit</Button>
+          </form>
+        </Form>
+           
+)
 }
 
 export default Sign_in_form

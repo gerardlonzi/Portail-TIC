@@ -2,17 +2,29 @@
 
 import ScreenLoader from '@/modules/ScreenLoader'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+
 
 function AuthLoader({children}:{children:React.ReactNode}){
 
-    const {status}= useSession()
+    const {status,data}= useSession()
     console.log(status);
+    const router = useRouter()
     
 
-    if (status === "loading") {
-            return <ScreenLoader />
+    useEffect(() => {
+        
+        if (status === "authenticated") {
+        
+                router.push('/')
+          
+        }
+
+    }, [status, router])
+
+    if (status === "loading" || status === "authenticated" || data =='undefined') {
+        return <ScreenLoader />
     }
 
     return <>{children}</>

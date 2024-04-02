@@ -1,91 +1,36 @@
 'use client'
 
-import {  useSession } from 'next-auth/react'
+import SendMailPassword from '@/modules/form/sendMailPassword'
+import Link  from 'next/link';
 import Image from 'next/image'
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-
-const formSchema = z.object({
-  
-  email: z.string().email({
-    message: "email invalide",
-  })
-})
+import { FaArrowLeft } from "react-icons/fa";
+import AuthLoader from '@/shared/AuthLoader';
 
 
 const Send_Mail = () => {
-  const { data, status } = useSession()
-  console.log(status);
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-    
-    },
-  })
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-
-    console.log(values)
-  }
-
-
-
-
  
 
   return (
-    <div className='flex w-full  '>
-      <div className='w-full p-24 bg-purple-600'>
-        <Image className='w-full h-full' src={"/imgs/login-illustrator.png"} alt='login-illustration.png' width={500} height={100} />
+    <AuthLoader>
+    <div className='flex w-full h-screen '>
+      <div className='w-full p-24 bg-purple-400  hidden md:flex items-center'>
+        <Image className='' src={"/imgs/forget.png"} alt='login-illustration.png' width={500} height={100} />
       </div>
-      <div className='w-full p-20 flex flex-col justify-center'>
-
-        <h2 className='text-3xl font-semibold'>Recevoir l'email de reinitialisation</h2>
-        
-        <div className='mt-14'>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-           
-              <FormField
-                control={form.control}
-                name="email"
-
-                render={({ field }) => (
-
-
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="johnDoe@gmail.com" {...field} />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-
-                )}
-              />
-             
-              <Button className='bg-purple-600 hover:bg-purple-800 block' type="submit">Submit</Button>
-            </form>
-          </Form>
+      <div className='w-full p-5 md:p-10 lg:p-24 flex gap-20 flex-col justify-center'>
+        <Link href='/sign-in'><FaArrowLeft className='w-6 h-6 hover:scale-150 transition ease-out duration-100 hover:text-purple-600' /></Link>
+        <div>
+          <h2 className='text-3xl font-semibold'>Recevoir l'email de reinitialisation</h2>
+          
+          <div className='mt-14'>
+            <SendMailPassword />
+          </div>
         </div>
-      </div>
+        </div>
+     
 
 
     </div>
+    </AuthLoader>
   )
 }
 
