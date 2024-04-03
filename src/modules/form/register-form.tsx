@@ -80,7 +80,7 @@ return (
 
 
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel >Email</FormLabel>
                   <FormControl>
                     <Input placeholder="johnDoe@gmail.com" {...field} />
                   </FormControl>

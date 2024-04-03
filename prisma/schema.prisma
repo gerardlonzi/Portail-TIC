@@ -42,8 +42,26 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  createdAt DateTime @default(now()) 
   accounts      Account[]
   sessions      Session[]
+  userDocument  UserDocument?
+}
+
+model UserDocument {
+  id   String  @id @default(cuid()) @map("_id")
+  userId String @unique
+  bio  String
+  avatar  String?
+  profession String
+  date_birthday String
+  onboardingCompleted Boolean @default(false)
+  adresse String
+  tel String
+  how_did_where  String
+  createdAt DateTime @default(now()) 
+  user  User  @relation(fields:[userId] , references: [id])
+
 }
 
 model VerificationToken {
