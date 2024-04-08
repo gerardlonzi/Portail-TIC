@@ -16,7 +16,7 @@ const Reset= () => {
 
 
     <div className='flex w-full  '>
-    <div className='w-full p-24 bg-purple-600'>
+    <div className='w-full p-24 border-r-2 border-[#7976FF]  bg-[#b2a3ff]'>
       <Image className='w-full h-full' src={"/imgs/forget.png"} alt='login-illustration.png' width={500} height={100} />
     </div>
     <div className='w-full p-20'>

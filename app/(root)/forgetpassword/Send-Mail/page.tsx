@@ -13,7 +13,7 @@ const Send_Mail = () => {
   return (
     <AuthLoader>
     <div className='flex w-full h-screen '>
-      <div className='w-full p-24 bg-purple-400  hidden md:flex items-center'>
+      <div className='w-full p-24 border-[#7976FF] border-r-2  bg-[#b2a3ff]  hidden md:flex items-center'>
         <Image className='' src={"/imgs/forget.png"} alt='login-illustration.png' width={500} height={100} />
       </div>
       <div className='w-full p-5 md:p-10 lg:p-24 flex gap-20 flex-col justify-center'>

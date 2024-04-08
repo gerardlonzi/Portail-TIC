@@ -7,14 +7,12 @@ import React, { useState } from 'react'
 import {  useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Form } from '@/components/ui/form'
-import Link from 'next/link'
+
 
 
 
 const formSchema = z.object({
-  username : z.string().min(2, {
-      message: "le nom doit comporter au moins 2 caracteres",
-    }),
+  
   email: z.string().email({
   message: "email invalide",
   }),
@@ -29,7 +27,7 @@ const Register_form = () => {
 const form = useForm<z.infer<typeof formSchema>>({
   resolver: zodResolver(formSchema),
   defaultValues: {
-    username:"",
+   
     email: "",
     password: "",
 
@@ -54,24 +52,7 @@ const inputType = isShowEye ? "text" : "password"
 return (
   <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-              control={form.control}
-              name="username"
-
-              render={({ field }) => (
-
-
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input placeholder="john Doe" {...field} />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-
-              )}
-            />
+          
           <FormField
               control={form.control}
               name="email"
@@ -121,7 +102,7 @@ return (
               />
               </div>
           
-            <Button className='bg-purple-600 hover:bg-purple-800 block' type="submit">Submit</Button>
+            <Button className='bg-[#7976FF] w-full hover:bg-purple-500 block' type="submit">Submit</Button>
           </form>
         </Form>
 

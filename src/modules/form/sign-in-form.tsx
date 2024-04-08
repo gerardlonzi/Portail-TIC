@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Eye, EyeOff } from 'lucide-react'
-import { LinkProps } from 'next/link'
 import React, { useState } from 'react'
 import {  useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form'
@@ -9,12 +8,11 @@ import { z } from 'zod'
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 
 const formSchema = z.object({
-  username : z.string().min(2, {
-      message: "le nom doit comporter au moins 2 caracteres",
-    }),
+ 
   email: z.string().email({
   message: "email invalide",
   }),
@@ -26,11 +24,14 @@ const formSchema = z.object({
 
 const Sign_in_form = () => {
 
+  const data = useSession()
+console.log(data);
+
   
 const form = useForm<z.infer<typeof formSchema>>({
   resolver: zodResolver(formSchema),
   defaultValues: {
-    username:"",
+ 
     email: "",
     password: "",
 
@@ -104,8 +105,11 @@ return (
                 
                 />
                 </div>
-            <Link href={"/forgetpassword/Send-Mail"} className='flex items-end justify-end text-purple-600'>Mot de passe oublier?</Link>
-            <Button className='bg-purple-600 hover:bg-purple-800 block' type="submit">Submit</Button>
+            <Link href={"/forgetpassword/Send-Mail"} className='flex items-end justify-end text-[#7976FF]'>Mot de passe oublier?</Link>
+            <div >
+
+            <Button className='bg-[#7976FF]  w-full  hover:bg-purple-500 block' type="submit">Submit</Button>
+            </div>
           </form>
         </Form>
            

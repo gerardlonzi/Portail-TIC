@@ -18,13 +18,13 @@ const Regidter= () => {
     <AuthLoader>
     <div className='flex w-full h-screen 
      '>
-      <div className=' p-14  w-full  hidden md:flex items-center   bg-purple-400'>
+      <div className=' p-14  w-full  hidden md:flex items-center border-r-2   border-[#7976FF]   bg-[#b2a3ff]'>
         <Image className=' ' src={"/imgs/login-illustration.png"} alt='login-illustration.png' width={500} height={100} />
       </div> 
       <div className='w-full p-5 md:p-10 lg:p-24'>
 
         <h2 className='text-3xl font-semibold'>Inscription</h2>
-        <p className='mt-10'>Vous avez déjà un compte ? <Link className='text-purple-600 ml-3 ' href={"/sign-in"}>se connecter</Link> </p>
+        <p className='mt-10'>Vous avez déjà un compte ? <Link className='text-[#7976FF] ml-3 ' href={"/sign-in"}>se connecter</Link> </p>
         <div className='mt-14'>
           <Register_form />
               

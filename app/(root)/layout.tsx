@@ -1,12 +1,17 @@
 
+import AuthLoader from '@/shared/AuthLoader'
 import React from 'react'
 
 const layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <div>
-            {
-                children
-            }
+            <AuthLoader>
+
+                    {
+                        children
+                    }
+
+            </AuthLoader>
         </div>
     )
 }

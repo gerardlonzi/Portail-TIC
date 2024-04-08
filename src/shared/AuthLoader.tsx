@@ -2,8 +2,10 @@
 
 import ScreenLoader from '@/modules/ScreenLoader'
 import { useSession } from 'next-auth/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useRouter } from 'next/navigation'
+import getDocValues from './isomboardigCompleted'
+import { usePathname } from 'next/navigation'
 
 
 function AuthLoader({children}:{children:React.ReactNode}){
@@ -11,19 +13,31 @@ function AuthLoader({children}:{children:React.ReactNode}){
     const {status,data}= useSession()
     console.log(status);
     const router = useRouter()
+    const pathename  = usePathname()
+    const onboardingIscompleted =  getDocValues()
+    console.log(onboardingIscompleted);
     
+    
+    
+    const ShoulRedirectOnboarding = (()=>{
+        return status === "authenticated" && !onboardingIscompleted && pathename !== "/onboarding"
+    })
 
-    useEffect(() => {
-        
-        if (status === "authenticated") {
-        
-                router.push('/')
-          
-        }
+    const ShoulNotRedirectOnboarding = (()=>{
+        return status === "authenticated" && onboardingIscompleted && pathename === "/onboarding"
+    })
 
-    }, [status, router])
+    if (status === "loading") {
+        return <ScreenLoader />
+    }
 
-    if (status === "loading" || status === "authenticated" || data =='undefined') {
+    if(ShoulNotRedirectOnboarding()){
+        router.push('/')
+        return <ScreenLoader />
+    }
+
+    if(ShoulRedirectOnboarding()){
+        router.push('/onboarding')
         return <ScreenLoader />
     }
 

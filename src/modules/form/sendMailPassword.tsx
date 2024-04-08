@@ -58,7 +58,7 @@ const SendMailPassword = () => {
                 )}
               />
              
-              <Button className='bg-purple-600 hover:bg-purple-800 block' type="submit">Submit</Button>
+              <Button className='bg-[#7976FF] hover:bg-purple-500 block' type="submit">Submit</Button>
             </form>
           </Form>
   )

@@ -16,11 +16,11 @@ model Account {
   provider           String
   providerAccountId  String
   refresh_token      String?  
-  access_token       String?  
+  access_token       String? 
   expires_at         Int?
   token_type         String?
   scope              String?
-  id_token           String?  
+  id_token           String? 
   session_state      String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -35,13 +35,13 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
 model User {
   id            String    @id @default(cuid()) @map("_id")
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  isAdmin       Boolean  @default(false)
   createdAt DateTime @default(now()) 
   accounts      Account[]
   sessions      Session[]
@@ -50,23 +50,25 @@ model User {
 
 model UserDocument {
   id   String  @id @default(cuid()) @map("_id")
+  username String? 
+  email   String?
   userId String @unique
-  bio  String
+  bio  String?
   avatar  String?
-  profession String
-  date_birthday String
+  profession String?
+  date_birthday String?
   onboardingCompleted Boolean @default(false)
-  adresse String
-  tel String
-  how_did_where  String
+  adresse String?
+  tel String?
+  how_did_where  String?
   createdAt DateTime @default(now()) 
-  user  User  @relation(fields:[userId] , references: [id])
+  user  User  @relation(fields:[userId] , references: [id], onDelete:Cascade)
 
 }
 
 model VerificationToken {
   identifier String @id @map("_id")
-  token      String   @unique
+  token      String  @unique  
   expires    DateTime
 
   @@unique([identifier, token])
