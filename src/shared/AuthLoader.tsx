@@ -4,7 +4,7 @@ import ScreenLoader from '@/modules/ScreenLoader'
 import { useSession } from 'next-auth/react'
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import getDocValues from './isomboardigCompleted'
+import getDocValues from './fechApi/getUserDocData'
 import { usePathname } from 'next/navigation'
 
 
@@ -14,21 +14,28 @@ function AuthLoader({children}:{children:React.ReactNode}){
     console.log(status);
     const router = useRouter()
     const pathename  = usePathname()
-    const onboardingIscompleted =  getDocValues()
+
+    const dataUserDoc =  getDocValues()
+    
+    const onboardingIscompleted =  dataUserDoc?.onboardingCompleted
     console.log(onboardingIscompleted);
     
     
     
     const ShoulRedirectOnboarding = (()=>{
-        return status === "authenticated" && !onboardingIscompleted && pathename !== "/onboarding"
+        return  !onboardingIscompleted && status === "authenticated" && pathename !== "/auth/onboarding"
     })
 
     const ShoulNotRedirectOnboarding = (()=>{
-        return status === "authenticated" && onboardingIscompleted && pathename === "/onboarding"
+        return  onboardingIscompleted && status === "authenticated" && pathename === "/auth/onboarding"
     })
 
     if (status === "loading") {
         return <ScreenLoader />
+    }
+    if(status === "unauthenticated"){
+        router.push('/auth/sign-in')
+        
     }
 
     if(ShoulNotRedirectOnboarding()){
@@ -37,7 +44,7 @@ function AuthLoader({children}:{children:React.ReactNode}){
     }
 
     if(ShoulRedirectOnboarding()){
-        router.push('/onboarding')
+        router.push('/auth/onboarding')
         return <ScreenLoader />
     }
 

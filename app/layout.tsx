@@ -1,11 +1,12 @@
 
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProviders from "@/providers/AuthProviders";
 import AuthLoader from "@/shared/AuthLoader";
-import { useSession } from "next-auth/react";
-import { ClerkProvider } from "@clerk/nextjs";
+import clsx from "clsx";
+import { ThemeProvider } from "@/providers/ThemeProviders";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +25,26 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-        <AuthProviders>
-          <body className={inter.className}>{children}</body>
-        </AuthProviders>
+      <AuthProviders>
+        <body className={clsx(inter.className, 'flex h-screen w-full')}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {/* <AuthLoader> */}
+              {children}
+            {/* </AuthLoader> */}
+          </ThemeProvider>
+        </body>
+      </AuthProviders>
     </html>
   );
 }
+
+
+
+
+
+

@@ -58,7 +58,6 @@ const ProfileStepForm = ({ isLoading, form }: onSubmitProfile) => {
 
 
 
-
     return (
         <Form {...form}>
             <form className="space-y-8">
@@ -80,11 +79,11 @@ const ProfileStepForm = ({ isLoading, form }: onSubmitProfile) => {
                                             </div>
                                     }
                                     <div className=''>
-                                        <Input accept='image/*' onChangeCapture={handleTakeImage} className='file:bg-[#7976FF] h-14 rounded-full  file:p-[9px] inline file:text-white file:mr-6 file:rounded-full file:cursor-pointer' disabled={isLoading} type='file' {...field} />
+                                        <Input accept='image/*' onChangeCapture={handleTakeImage} className='file:bg-[#7976FF] h-14 rounded-full  file:p-[9px] inline file:text-white  file:mr-6 file:rounded-full file:cursor-pointer' disabled={isLoading} type='file' {...field} />
                                         <span className='text-xs text-gray-300'>ce champs est facultaive</span>
 
                                     </div>
-
+                                   
                                 </div>
                             </FormControl>
 

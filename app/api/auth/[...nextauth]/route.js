@@ -17,12 +17,8 @@ const handler = NextAuth({
                 email: email
               }
             });
-            const existingUserDoc = await prisma.userDocument.findUnique({
-              where: {
-                email: email
-              }
-            });
-            if (existingUser && !existingUserDoc) {
+            
+            if (existingUser ) {
               const newDocument = await prisma.userDocument.create({
                 data: {
                   email: email,

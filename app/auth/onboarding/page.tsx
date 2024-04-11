@@ -1,10 +1,10 @@
 import OnboardingContainer from '@/modules/Onboarding/OnboardingContainer'
 import React from 'react'
 
-const onboarding = () => {
+const page = () => {
   return (
     <OnboardingContainer />
   )
 }
 
-export default onboarding
+export default page

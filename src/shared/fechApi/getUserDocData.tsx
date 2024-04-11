@@ -11,13 +11,15 @@ const getDocValues = () => {
 
          axios.get("/api/userDocData")
         .then((result)=>{
-            setValue(result.data.onboardingCompleted)
+            setValue(result.data)
         })
         .catch(err=>{
             console.error(err);
             
         })
     },[])
+   
+    
 
   return value
 

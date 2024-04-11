@@ -3,7 +3,7 @@ import React from 'react'
 
 const ScreenLoader = () => {
   return (
-    <div className='w-screen  h-screen bg-white flex items-center justify-center'>
+    <div className='w-screen  h-screen dark:bg-black bg-white flex items-center justify-center'>
         <div className='text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
                 <svg className='fill-[#340bff] animate-spin sm:w-10 h-8 w-8 sm:h-10 lg:w-12 lg:h-12' viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_13_6)">

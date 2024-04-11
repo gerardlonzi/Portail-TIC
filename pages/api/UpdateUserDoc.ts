@@ -22,11 +22,11 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse){
             })
 
             if (isUserData) {
-                if(!req.query){
+                if(!req.body){
                     return
                 }
 
-                const {username,avatar,bio,profession,date_birthday,adresse,tel,how_did_where} = req.query
+                const {username,bio,profession,date_birthday,adresse,tel,how_did_where} = req.body
 
                
                 const authVerified = await prisma.userDocument.update({
@@ -34,15 +34,14 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse){
                         userId: isUserData.id
                     },
                     data :{
-                        username: Array.isArray(username) ? username[0] : username,
-                        bio: Array.isArray(bio) ? bio[0] : bio,
-                        avatar:Array.isArray(avatar) ? avatar[0] : avatar,
-                        profession: Array.isArray(profession) ? profession[0] : profession,
-                        date_birthday: Array.isArray(date_birthday) ? date_birthday[0] : date_birthday,
-                        onboardingCompleted: true,
-                        adresse: Array.isArray(adresse) ? adresse[0] : adresse,
-                        tel: Array.isArray(tel) ? tel[0] : tel,
-                        how_did_where: Array.isArray(how_did_where) ? how_did_where[0] : how_did_where,
+                        username,
+                        bio,
+                        profession,
+                        date_birthday,
+                        // onboardingCompleted: true,
+                        adresse,
+                        tel,
+                        how_did_where
                     }
 
                     

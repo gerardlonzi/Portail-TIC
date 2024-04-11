@@ -4,24 +4,16 @@ import { ActionStep } from '../../../../types/onboardingType'
 import TabbarStep from '../constant/TabbarStep'
 import Image from 'next/image'
 import ProfileStepForm from '@/modules/form/profileStepForm'
-import {Cloudinary} from "@cloudinary/url-gen"
-import {thumbnail} from "@cloudinary/url-gen/actions/resize"
-import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity'
-
-
+import axios from 'axios'
 import { FormSchema } from '@/modules/constants/constantsForm'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import UpdateUserDocument from '@/shared/fechApi/UpdateUserDocument'
 
 
-const cld = new Cloudinary(
-  {
-    cloud:{
-      cloudName :process.env.CLOUDNAME
-    }
-  }
-)
+
+
 
 const formSchema = FormSchema
 
@@ -55,28 +47,48 @@ const form = useForm<z.infer<typeof formSchema>>({
 
 
 
-function onSubmit(values: z.infer<typeof formSchema>) {
+
+async function onSubmit(values: z.infer<typeof formSchema>) {
   setIsLoading(true)
 
-  const {username,
-    bio,
-    avatar,
-    profession,
-    date_birthday,
-    adresse,
-    tel,
-    how_did_where} = values
-  console.log(values)
+  const { avatar, ...others} = values
+    console.log(values)
+    
+    
+    let avatars ;
 
-
-
-
-
-
+    
+    try {
+      if(avatar){
   
- setIsLoading(false)
+        const formdata  = new FormData()
+        formdata.append("file",avatar)
+        formdata.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME || "")
+          const response  = await axios.post(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, formdata ,{
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+        
+        console.log(response.data)
+       
+        
+         }else{
+           console.error("l'avatar est indefini");
+           
+         }
+         await UpdateUserDocument(others)
+         setIsLoading(false)
+         Next()
+      }
 
-  Next()
+
+
+      catch(err){
+        console.error("une erreur s'est produite" + err)
+      }
+
 
 }
 
@@ -90,7 +102,7 @@ function onSubmit(values: z.infer<typeof formSchema>) {
           <Image src={"/imgs/onboarding-profile.webp"} alt='onboarding-ytb.webp' width={550} height={550} />
         </div>
         <div className='w-full p-16 space-y-14'>
-          <div className='sticky top-0 pt-3 bg-white'>
+          <div className='sticky top-0 pt-3 dark:bg-black bg-white'>
              <TabbarStep Next={Next} Prev={Prev} IsFirstStep={IsFirstStep} IsLastStep={IsLastStep} StepList={StepList} getCurrentStep={getCurrentStep} />
           </div>
           <div className='space-y-10'>
@@ -98,7 +110,7 @@ function onSubmit(values: z.infer<typeof formSchema>) {
             <ProfileStepForm form={form} isLoading={isLoading}  />
           </div>
 
-          <Footertab Next={form.handleSubmit(onSubmit)} Prev={Prev} IsFirstStep={IsFirstStep} IsLastStep={IsLastStep} />
+          <Footertab isLoadding={isLoading} Next={form.handleSubmit(onSubmit)} Prev={Prev} IsFirstStep={IsFirstStep} IsLastStep={IsLastStep} />
         </div>
 
       </div>

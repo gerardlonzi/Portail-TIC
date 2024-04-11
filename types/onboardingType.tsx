@@ -23,6 +23,7 @@ export interface ActionStep {
     IsLastStep:()=> boolean
     getCurrentStep? : any 
     StepList? : BaseComponentsPropsStepLIst[] | undefined
+    isLoadding?: boolean
 }
 
 

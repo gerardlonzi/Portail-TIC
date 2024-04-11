@@ -7,6 +7,7 @@ import prisma from '@/lib/prisma';
 export default async function handler(req:NextApiRequest, res:NextApiResponse){
     try {
         const session = await getSession({ req: req }) // Passer l'objet req correctement
+        console.log(session);
         
         if (!session) {
             return res.status(404).json("Vous n'êtes pas authentifié")
