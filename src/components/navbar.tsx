@@ -40,6 +40,7 @@ import {
 import { useTheme } from 'next-themes'
 
 import { signOut, useSession } from 'next-auth/react'
+import AvatarPushProfile from './AvatarPushProfile';
 
 
 
@@ -55,7 +56,7 @@ const Navbar = () => {
 
   const { setTheme } = useTheme()
   return (
-    <div className='flex items-center justify-between mb-4 '>
+    <div className='flex fixed w-full py-5 pr-16 bg-[#0b0b0b] z-40 top-0 items-center justify-between  '>
       <div className="flex gap-5 ">
         <Link className='w-10 h-10 p-2  bg-[#7976FF] rounded-full' href={"/"} >SC</Link>
      
@@ -123,11 +124,13 @@ const Navbar = () => {
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <User className="mr-2 h-4 w-4" />
-                  <span>Profile</span>
-                  <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-                </DropdownMenuItem>
+                <AvatarPushProfile PrintTmage={false}>
+                  <DropdownMenuItem>
+                    <User className="mr-2 h-4 w-4" />
+                    <span>Profile</span>
+                    <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </AvatarPushProfile>
                 <DropdownMenuItem>
                   <CreditCard className="mr-2 h-4 w-4" />
                   <span>Billing</span>

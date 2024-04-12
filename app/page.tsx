@@ -12,30 +12,23 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { PiVideoFill } from "react-icons/pi";
 import { BiSolidImageAdd, BiSolidPencil } from "react-icons/bi"
 import CreatePost from '@/components/CreatePost'
+import Link from 'next/link'
+import AvatarPushProfile from '@/components/AvatarPushProfile'
 
 
 
 
 const Home = () => {
-  const { data, status } = useSession()
 
-  const image = data?.user?.image
-  const name = data?.user?.name
-
-
-
-
+  
   return (
-    <div className=' w-full'>
+    <div className=' w-full '>
       <Container>
         <Navbar />
         <LayoutSidebar>
           <div className='flex w-full flex-col'>
             <div className='flex py-3 px-5 gap-5 bg-[#151515] rounded-xl'>
-              <Avatar>
-                <AvatarImage className='' src={image || "A"} />
-                <AvatarFallback>SC</AvatarFallback>
-              </Avatar>
+               <AvatarPushProfile />
               <div className='w-full space-y-3'>
                 <CreatePost>
                   <input autoComplete='off' className="placeholder:italic dark:placeholder:text-[#414141]  block  w-full border border-black rounded-full dark:border-[#3b3b3b] bg-white dark:bg-[#232323] py-2 px-3 shadow-sm focus:outline-none sm:text-sm" placeholder="What happening..." type="text" name="search" />

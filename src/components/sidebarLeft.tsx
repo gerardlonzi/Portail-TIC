@@ -1,46 +1,65 @@
 'use client'
-import Link from 'next/link'
-import React, { useMemo } from 'react'
-import {Home ,ShoppingBag,History,SquarePlay,Users} from 'lucide-react';
-import { MdOutlineGroupAdd } from "react-icons/md"
+
+import React from 'react'
 import { NavData } from '@/modules/constants/navLinkConstant';
 import ActiveLinks from './ActiveLinks';
+import { ScrollArea } from "@/components/ui/scroll-area"
+import clsx from 'clsx';
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
 
-const SidebarLeft = () => {
-   
+const SidebarLeft = ({ animateSidebarLeft = false }: { animateSidebarLeft?: boolean }) => {
+
 
     return (
-        <div className='w-[40%] bg-[#151515] rounded-xl py-10 pl-10'>
+        <ScrollArea className={clsx(animateSidebarLeft ? "py-10 px-5" :  "w-[40%] py-10 pl-10", ' h-screen sticky top-0   bg-[#151515] rounded-xl ')} >
+
             <aside className=' h-full space-y-10 '>
-               
                 <div className='space-y-8'>
-                <div>
-                    <p>Menu</p>
-                </div>
-                {
-                        NavData?.map((el,index)=>(
+                    {
+                        !animateSidebarLeft && 
+                    <div>
+                        <p>Menu</p>
+                    </div>
+                    }
+                    {
+                        NavData?.map((el, index) => (
                             <ActiveLinks key={index} href={el.path}>
-                                    <span className='w-6 h-6'>{el.icons}</span><span>{el.name}</span>
+                                {
+                                    animateSidebarLeft ?
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                                <TooltipTrigger asChild>
+                                                    <span className='w-6 h-6'>{el.icons}</span>
+                                                </TooltipTrigger>
+                                                <TooltipContent>
+                                                    <p>{el.name}</p>
+                                                </TooltipContent>
+                                            </Tooltip>
+                                        </TooltipProvider>
+                                        :
+                                        <>
+                                            <span className='w-6 h-6'>{el.icons}</span><span>{el.name}</span>
+                                        </>
+                                }
                             </ActiveLinks>
                         ))
-                }
-                
-                    <Link className='flex gap-5 items-center text-[#5a4c4c]' href={"/"}></Link>
-                    <Link  className='flex gap-5 text-[#949494] items-center' href={"/"}><span><SquarePlay className='w-6 h-6'/></span><span>Video(s)</span></Link>
-                    <Link className='flex gap-5 text-[#949494] items-center' href={"/"}><span><ShoppingBag className='w-6 h-6'/></span><span>Shop</span></Link>
-                    <Link className='flex gap-5 text-[#949494] items-center'  href={"/"}><span><History className='w-6 h-6'/></span><span>History</span></Link>
-                    <Link  className='flex gap-5 text-[#949494] items-center' href={"/"}><span><Users className='w-6 h-6'/></span><span>Groupe(s)</span></Link>
-                    <Link  className='flex gap-5 text-[#949494] items-center' href={"/"}><span><MdOutlineGroupAdd className='w-6 h-6'/></span><span>Suggestions</span></Link>
-
-                    
-
+                    }
                 </div>
-                <div>
+                {
+                        !animateSidebarLeft && 
+                    <div>
                     <p>Trends for you</p>
-                </div>
+                    </div>
+                    }
 
             </aside>
-        </div>
+
+        </ScrollArea>
     )
 }
 

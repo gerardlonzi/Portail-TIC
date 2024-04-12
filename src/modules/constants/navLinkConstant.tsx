@@ -34,7 +34,7 @@ export const NavData =[
 {
     name: "Suggestions",
         path: "/suggestions",
-            icons : <MdOutlineGroupAdd />
+            icons : <MdOutlineGroupAdd className='w-6 h-6'/>
 }
 
 ]
