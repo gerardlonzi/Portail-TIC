@@ -8,11 +8,21 @@ import LayoutSidebar from '@/components/LayoutSidebar'
 import Navbar from '@/components/navbar'
 import Container from '@/components/container'
 import Image from 'next/image'
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
+import { useState } from 'react'
+import { CoverProfileImport } from '@/modules/form/CoverProfilePicture'
 
 
 
-const page = () => {
+const page = () => { 
+
+
+  const [IsGetCoverPicture, setIsGetCoverPicture] = useState<boolean>(false)
+  const [IsGetotherPicture, setIsGetotherPicture] = useState<boolean>(false)
+
   const { data } = useSession()
+
+
   const name = data?.user?.name
   const nameUrl = data?.user?.name?.replace(/\s+/g, '')
 
@@ -41,14 +51,29 @@ const page = () => {
       <LayoutSidebar animateSidebarLeft={true} PrintSidebarRight={false}>
 
         <div className='w-full '>
-          <div className='rounded-xl bg-[#151515] w-full h-96'>
-              <div>
+        <div className='rounded-xl bg-[#151515] w-full h-96'>
+                <div>
+                    <Popover>
+                        <PopoverTrigger>
+                          {
+                            IsGetCoverPicture ? <button>Modifier la photo de couverture</button>: <button>Ajouter une photo de couverture</button>
+                          }
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <div>
+                            <CoverProfileImport />
+                          </div>
+                            
 
-              </div>
-          </div>
+
+                        </PopoverContent>
+                    </Popover>
+
+                </div>
+            </div>
           <div>
              <div>
-                <Image src={image || ""} height={200} width={300}  alt='profilPicture' />
+                <Image src={image || ""} height={10} width={1000} className='outline outline-purple-500 rounded-full object-cover w-40 h-40' alt='profilPicture' />
              </div>
              <p>
               {name}

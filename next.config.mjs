@@ -1,15 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-module.exports = {
+const nextConfig = {
     images: {
-      remotePatterns: [
-        {
-          protocol: 'http',
-          hostname: 'assets.example.com',
-          port: '3000',
-          pathname: '/[Username]/**',
-        },
-      ],
-    },
-  }
+        domains: ['lh3.googleusercontent.com'],
+      },
+
+};
+
 export default nextConfig;
