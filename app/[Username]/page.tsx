@@ -10,8 +10,7 @@ import Container from '@/components/container'
 import Image from 'next/image'
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { useState } from 'react'
-import { CoverProfileImport } from '@/modules/form/CoverProfilePicture'
-
+import { CoverProfileImport, DeleteCoverProfile } from '@/modules/form/CoverProfilePicture'
 
 
 const page = () => { 
@@ -43,6 +42,8 @@ const page = () => {
   // }
 
 
+
+
   return (
     <Container>
 
@@ -62,6 +63,7 @@ const page = () => {
                         <PopoverContent>
                           <div>
                             <CoverProfileImport />
+                            <DeleteCoverProfile />
                           </div>
                             
 

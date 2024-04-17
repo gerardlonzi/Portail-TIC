@@ -11,9 +11,9 @@ const SidebarRight = () => {
 
 
   return (
-    <ScrollArea className='w-[40%] h-screen sticky top-0 overflow-y-hidden  bg-[#151515] rounded-xl py-10 pl-10' >
+    <ScrollArea className='w-[40%]  sticky top-0 overflow-y-hidden  border-l-2  py-10 pl-10' >
     
-      <aside className='  h-full '>
+      <aside className='h-full '>
         <div>
           <p>Story</p>
           <div>

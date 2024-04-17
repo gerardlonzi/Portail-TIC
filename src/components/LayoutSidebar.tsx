@@ -3,24 +3,31 @@ import SidebarLeft from './sidebarLeft'
 import SidebarRight from './SidebarRight'
 
 const LayoutSidebar = ({ children, PrintSidebarLeft = true,
-  PrintSidebarRight = true,animateSidebarLeft }: {
+  PrintSidebarRight = true, animateSidebarLeft }: {
     children: React.ReactNode
     PrintSidebarLeft?: boolean
     PrintSidebarRight?: boolean
-    animateSidebarLeft?:boolean
+    animateSidebarLeft?: boolean
 
   }) => {
   return (
-    <div className='flex w-full gap-5 mt-20'>
+    <div className='flex w-full h-full gap-5 mt-20'>
       {
-        PrintSidebarLeft && <SidebarLeft animateSidebarLeft={animateSidebarLeft}/>
+       
+          PrintSidebarLeft &&  <SidebarLeft animateSidebarLeft={animateSidebarLeft} />
+        
       }
+      {
+     
+
+          children
+      
+      }
+
       {
         
-        children
-      }
-      {
-        PrintSidebarRight && <SidebarRight />
+          PrintSidebarRight &&  <SidebarRight /> 
+        
       }
     </div>
   )

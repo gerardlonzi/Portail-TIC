@@ -15,7 +15,9 @@ import {
   User,
   UserPlus,
   Users,
+
 } from 'lucide-react'
+import {  BiSolidPencil } from "react-icons/bi"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -84,13 +86,13 @@ const Navbar = () => {
 
 
         <div className='flex  items-center gap-8   '>
+        <BiSolidPencil className=' w-8 h-8 rounded-full border p-1 hover:text-[#6a68ff]' />
 
-
-          <Link href={"/"}><RiMessengerLine className='w-6 h-6' /></Link>
+          <Link href={"/"}><RiMessengerLine className='w-6 h-6 hover:text-[#6a68ff]' /></Link>
           <Popover>
             <PopoverTrigger>
               <div className='relative'>
-                <Bell />
+                <Bell className="hover:text-[#6a68ff]"/>
                 <div className='absolute right-0 -top-1'>
                   <span className="relative flex h-3 w-3">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8987ff] opacity-75"></span>

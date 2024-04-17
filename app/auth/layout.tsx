@@ -16,9 +16,9 @@ export default function RootLayout({
 
   return (
     <>
-            <AuthLoader>
+            
              {children}
-           </AuthLoader>
+           
     </>
           
   );

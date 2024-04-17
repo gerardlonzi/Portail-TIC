@@ -34,7 +34,7 @@ function AuthLoader({children}:{children:React.ReactNode}){
         return <ScreenLoader />
     }
     if(status === "unauthenticated"){
-        router.push('/auth/sign-in')
+        return router.push('/auth/sign-in')
         
     }
 

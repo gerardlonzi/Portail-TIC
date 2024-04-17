@@ -10,7 +10,7 @@ const ActiveLinks = ({href,children}:{href:string,children:React.ReactNode}) => 
         return pathename === href
     },[pathename,href])
   return (
-    <Link href={href}  className={clsx(isActive ? 'text-[#6a68ff]':"text-[#949494]","flex gap-5 items-center hover:text-[#6a68ff] transition duration-100 ease-in")}>
+    <Link href={href}  className={clsx(isActive ? 'text-[#8381ff]':"text-white   ","flex gap-5 items-center hover:text-[#8381ff] transition duration-100 ease-in")}>
         {
             children
         }

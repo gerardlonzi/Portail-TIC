@@ -1,4 +1,4 @@
-import { Home, icons,History, SquarePlay, ShoppingBag, Users } from "lucide-react"
+import { Home, icons,History, SquarePlay, ShoppingBag, Users , PlusCircle} from "lucide-react"
 
 import { MdOutlineGroupAdd } from "react-icons/md"
 
@@ -35,6 +35,12 @@ export const NavData =[
     name: "Suggestions",
         path: "/suggestions",
             icons : <MdOutlineGroupAdd className='w-6 h-6'/>
+}
+,
+{
+    name: "Creer",
+        path: "/create",
+            icons : <PlusCircle className='w-6 h-6'/>
 }
 
 ]

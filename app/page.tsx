@@ -2,61 +2,75 @@
 'use client'
 
 import React, { useEffect } from 'react'
-
-
+import { Ellipsis, Heart, Forward, MessageCircle, Dot  } from 'lucide-react';
+import { FaHeart, FaBagShopping } from "react-icons/fa6"
 import LayoutSidebar from '@/components/LayoutSidebar'
 import Navbar from '@/components/navbar'
 import Container from '@/components/container'
-import { signOut, useSession } from 'next-auth/react'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { PiVideoFill } from "react-icons/pi";
-import { BiSolidImageAdd, BiSolidPencil } from "react-icons/bi"
-import CreatePost from '@/components/CreatePost'
-import Link from 'next/link'
 import AvatarPushProfile from '@/components/AvatarPushProfile'
+import Image from 'next/image';
 
 
 
 
 const Home = () => {
+const Newdate:any = new Date().getMinutes()
 
-  
+
+
   return (
     <div className=' w-full '>
       <Container>
         <Navbar />
         <LayoutSidebar>
-          <div className='flex w-full flex-col'>
-            <div className='flex py-3 px-5 gap-5 bg-[#151515] rounded-xl'>
-               <AvatarPushProfile />
-              <div className='w-full space-y-3'>
-                <CreatePost>
-                  <input autoComplete='off' className="placeholder:italic dark:placeholder:text-[#414141]  block  w-full border border-black rounded-full dark:border-[#3b3b3b] bg-white dark:bg-[#232323] py-2 px-3 shadow-sm focus:outline-none sm:text-sm" placeholder="What happening..." type="text" name="search" />
+         
 
-                </CreatePost>
-                <div className='flex justify-center gap-5'>
-                  <CreatePost>
-                    <div className='flex border cursor-pointer rounded-full space-x-2 items-center text-sm py-1 px-3 '>
-                      <BiSolidImageAdd className='w-6 h-6 text-green-400' />
-                      <span>Image</span>
-                    </div>
-                  </CreatePost>
-                  <CreatePost>
-                    <div className='flex border cursor-pointer rounded-full space-x-2 items-center text-sm py-1 px-3 '>
-                      <PiVideoFill className='w-6 h-6 text-blue-500' />
-                      <span>Videos</span>
-                    </div>
-                  </CreatePost>
-                  <CreatePost>
-                    <div className='flex cursor-pointer  border rounded-full space-x-2 items-center text-sm py-1 px-3 '>
-                      <BiSolidPencil className='text-red-600 w-6 h-6' />
-                      <span>Text</span>
-                    </div>
-                  </CreatePost>
+         
+          <div className='py-10 mx-20 border p-6  rounded-xl'>
+            <div className='flex gap-4'>
+              <AvatarPushProfile />
+              <div className='w-full space-y-2'>
+                <div className='flex justify-between items-center'>
+                  <div className='flex gap-4'>
+                    <p className='font-semibold'>Gerard Lonzi</p>
+                    <button className='text-[#7775ff] flex'>< Dot className='text-' />Suivre</button>
+                  </div>
+                  <Ellipsis />
+                </div>
+                <div>
+                  <p className='text-xs'>il y'a {Newdate} min </p>
                 </div>
               </div>
             </div>
+            <div className=' mt-6 space-y-8'>
+              <p className='text-sm'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et voluptates unde neque voluptas aliquam at necessitatibus! Quod amet beatae ducimus, fugit aliquam iure magnam, nesciunt dicta nisi rem, omnis a!</p>
+              <Image src={'/imgs/9.jpg'} alt='post' width={500} height={100} className="w-full h-[37rem] object-cover" />
+            </div>
+            <div>
+              <div className='flex justify-between mt-4'>
+                <div className='flex items-center gap-2'>
+                  <FaHeart className='text-red-700' /> 22k annie et une autre persomme 
+                </div>
+                <button className='underline'>20 commentaires</button>
+              </div>
+              <div className='flex justify-between gap-3 mt-8'>
+                <button className='border py-3 w-full flex rounded-md  justify-center'>
+                  <Heart />
+                </button>
+                <button className='border py-3 w-full flex rounded-md  justify-center'>
+                  <MessageCircle />
+                </button>
+                <button className='border py-3 w-full flex rounded-md  justify-center'>
+                  <Forward /> 14
+                </button>
+                <button className='border py-3 w-full flex rounded-md  justify-center'>
+                  <FaBagShopping/>
+                  </button>
+              </div>
+            </div>
+
           </div>
+         
         </LayoutSidebar>
       </Container>
     </div>

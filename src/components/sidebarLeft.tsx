@@ -16,9 +16,10 @@ const SidebarLeft = ({ animateSidebarLeft = false }: { animateSidebarLeft?: bool
 
 
     return (
-        <ScrollArea className={clsx(animateSidebarLeft ? "py-10 px-5" :  "w-[40%] py-10 pl-10", ' h-screen sticky top-0   bg-[#151515] rounded-xl ')} >
+      
+        <ScrollArea className={clsx(animateSidebarLeft ? "py-10 px-5" :  "w-[24%] py-10 px-10", '    border-r-2        sticky top-0 ')} >
 
-            <aside className=' h-full space-y-10 '>
+            <aside className=' space-y-10  '>
                 <div className='space-y-8'>
                     {
                         !animateSidebarLeft && 
@@ -54,6 +55,7 @@ const SidebarLeft = ({ animateSidebarLeft = false }: { animateSidebarLeft?: bool
                         !animateSidebarLeft && 
                     <div>
                     <p>Trends for you</p>
+                   
                     </div>
                     }
 
