@@ -1,18 +1,17 @@
 'use client'
 
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import Sign_in_form from '@/modules/form/sign-in-form';
-import AuthLoader from '@/shared/AuthLoader';
 
 
 
 
 const SignIn = () => {
-  const { data, status } = useSession()
+  const {  status } = useSession()
   console.log(status);
 
 
@@ -20,7 +19,7 @@ const SignIn = () => {
 
 
   return (
-    <AuthLoader>
+  
       <div className='flex  w-full h-screen  '>
         <div className='w-full h-screen hidden md:flex items-center border-r-2 border-[#7976FF]  p-14 bg-[#b2a3ff]'>
           <Image className='' src={"/imgs/login-illustrator.png"} alt='login-illustration.png' width={500} height={100} />
@@ -54,7 +53,7 @@ const SignIn = () => {
 
 
       </div>
-    </AuthLoader>
+   
   )
 }
 

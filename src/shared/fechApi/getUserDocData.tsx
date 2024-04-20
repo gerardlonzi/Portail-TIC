@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { useEffect, useState } from 'react'
 
 import axios from 'axios'
 
-
-const getDocValues = () => {
-
-    const [value , setValue] = useState<any>()
-
+export const getDocValues =()=> {
+    
+    const [value , setValue] = useState<any>(null)
     useEffect(()=>{
 
          axios.get("/api/userDocData")
@@ -18,11 +17,8 @@ const getDocValues = () => {
             
         })
     },[])
-   
-    
 
   return value
 
 }
 
-export default getDocValues

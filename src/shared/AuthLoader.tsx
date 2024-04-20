@@ -2,26 +2,33 @@
 
 import ScreenLoader from '@/modules/ScreenLoader'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import getDocValues from './fechApi/getUserDocData'
+import {getDocValues} from './fechApi/getUserDocData'
 import { usePathname } from 'next/navigation'
 
 
-function AuthLoader({children}:{children:React.ReactNode}){
+const AuthLoader =  ({children}:{children:React.ReactNode}) =>{
 
     const {status,data}= useSession()
     console.log(status);
     const router = useRouter()
     const pathename  = usePathname()
+    const [onboardingIscompleted, setOnboardingIscompleted] = useState<boolean | null>(null)
 
-    const dataUserDoc =  getDocValues()
-    
-    const onboardingIscompleted =  dataUserDoc?.onboardingCompleted
+    useEffect(() => {
+        const fetchDocValues = async () => {
+            const docData = await getDocValues()
+            setOnboardingIscompleted(docData?.onboardingCompleted)
+        }
+        fetchDocValues()
+    }, [])
     console.log(onboardingIscompleted);
     
     
-    
+ useCallback(()=>{
+
+
     const ShoulRedirectOnboarding = (()=>{
         return  !onboardingIscompleted && status === "authenticated" && pathename !== "/auth/onboarding"
     })
@@ -30,11 +37,16 @@ function AuthLoader({children}:{children:React.ReactNode}){
         return  onboardingIscompleted && status === "authenticated" && pathename === "/auth/onboarding"
     })
 
+    const ShoulNotRedirectSign_in = (()=>{
+        return   status === "unauthenticated" && pathename !== "/auth/sign-in" ||  pathename !== "/auth/register"
+    })
+
     if (status === "loading") {
         return <ScreenLoader />
     }
-    if(status === "unauthenticated"){
-        return router.push('/auth/sign-in')
+    if(ShoulNotRedirectSign_in()){
+         router.push('/auth/sign-in')
+        return <ScreenLoader />
         
     }
 
@@ -48,7 +60,10 @@ function AuthLoader({children}:{children:React.ReactNode}){
         return <ScreenLoader />
     }
 
-    return <>{children}</>
+    return <> {children} </>
+
+},[onboardingIscompleted,pathename,status])   
+return null
     }
 
 export default AuthLoader
