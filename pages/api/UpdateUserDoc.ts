@@ -27,23 +27,14 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse){
                     return
                 }
 
-                const {username,bio,profession,date_birthday,adresse,tel,how_did_where} = req.body
+                const data = req.body
 
                
                 const authVerified = await prisma.userDocument.update({
                     where: {
                         userId: isUserData.id
                     },
-                    data :{
-                        username,
-                        bio,
-                        profession,
-                        date_birthday,
-                        // onboardingCompleted: true,
-                        adresse,
-                        tel,
-                        how_did_where
-                    }
+                    data :data
 
                     
                     
