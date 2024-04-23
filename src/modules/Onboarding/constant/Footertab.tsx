@@ -52,10 +52,10 @@ const Footertab = ({ Prev,
     if (!IsFirstStep() && !IsLastStep()) {
         actionstep = <>
             <div className='flex justify-between'>
-                <Button onClick={Prev} className='hover:bg-gray-100 border border-black flex items-end bg-white text-black'>Retour</Button>
+                <Button onClick={Prev} disabled={isLoadding} className='hover:bg-gray-100 border border-black flex items-end bg-white text-black'>Retour</Button>
                 <Button disabled={isLoadding} onClick={Next} className=' bg-[#7976FF]   hover:bg-purple-500 flex items-end text-white'>
                     {
-                        isLoadding ?  <Image className='grayscale mx-4' src={"/imgs/spin.png"} alt='spinner' width={20} height={20} /> : <>Suivant</> 
+                        isLoadding ?  <Image className='brightness-[9] mx-4 animate-spin' src={"/imgs/spin.png"} alt='spinner' width={20} height={20} /> : <>Suivant</> 
                     }
                     </Button>
             </div>

@@ -12,14 +12,14 @@ const TabbarStep = ({
         <div className='w-full flex space-x-14  '>
             {
                 StepList?.map((el,index)=>(
-                    <div key={index} className={clsx(getCurrentStep()?.id == el.id && 'border-[#7976FF] border-b-2','space-x-3 pb-2  text-gray-600 ')}>
+                    <div key={index} className={clsx(getCurrentStep()?.id == el.id ? 'border-[#7976FF] text-[#7976FF] border-b-2': " text-gray-600 dark:text-slate-400 ",'space-x-3 pb-2  ')}>
                         <span className={clsx(getCurrentStep()?.id == el.id ? "bg-[#7976FF]" :"bg-gray-600" , 'text-xs px-2 py-1 rounded-full  text-white')}>{el.id}</span>
                         <span>{el.label}</span>
                     </div>
                 ))
             }
         </div>
-        <div className='absolute -z-10 border-b-2 w-full  bottom-0 border-gray-300'></div>
+        <div className='absolute -z-10 border-b-2 w-full  bottom-0 dark:border-slate-400 border-gray-300'></div>
  
     </div>
   )

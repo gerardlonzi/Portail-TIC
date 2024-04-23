@@ -59,34 +59,34 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
 
     
     try {
-      if(avatar){
+      // if(avatar){
   
-        const formdata  = new FormData()
-        formdata.append("file",avatar)
-        formdata.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME || "")
-          const response  = await axios.post(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, formdata ,{
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        )
+      //   const formdata  = new FormData()
+      //   formdata.append("file",avatar)
+      //   formdata.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME || "")
+      //     const response  = await axios.post(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, formdata ,{
+      //       headers: {
+      //         'Content-Type': 'multipart/form-data'
+      //       }
+      //     }
+      //   )
         
-        console.log(response.data)
+      //   console.log(response.data)
        
         
-         }else{
-           console.error("l'avatar est indefini");
+      //    }else{
+      //      console.error("l'avatar est indefini");
            
-         }
-         await UpdateUserDocument(others)
-         setIsLoading(false)
+      //    }
+       await UpdateUserDocument(others)
+         
          Next()
       }
-
-
-
       catch(err){
         console.error("une erreur s'est produite" + err)
+      }
+      finally{
+          setIsLoading(false)
       }
 
 
@@ -97,12 +97,12 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
     <>
 
 
-      <div className='flex   w-full '>
-        <div className='px-36 h-screen sticky top-0 flex items-center  justify-center bg-[rgb(244,244,255)] border-r-2 border-[#7976FF]'>
+      <div className='flex   md:w-full '>
+        <div className='px-36 h-screen sticky top-0 hidden md:flex items-center  justify-center bg-[rgb(244,244,255)] border-r-2 border-[#7976FF]'>
           <Image src={"/imgs/onboarding-profile.webp"} alt='onboarding-ytb.webp' width={550} height={550} />
         </div>
         <div className='w-full p-16 space-y-14'>
-          <div className='sticky top-0 pt-3 dark:bg-black bg-white'>
+          <div className='sticky top-0 pt-3 bg-[#0A0A0A]  '>
              <TabbarStep Next={Next} Prev={Prev} IsFirstStep={IsFirstStep} IsLastStep={IsLastStep} StepList={StepList} getCurrentStep={getCurrentStep} />
           </div>
           <div className='space-y-10'>

@@ -105,7 +105,7 @@ return (
                 
                 />
                 </div>
-            <Link href={"/forgetpassword/Send-Mail"} className='flex items-end justify-end text-[#7976FF]'>Mot de passe oublier?</Link>
+            <Link href={"/auth/forgetpassword/Send-Mail"} className='flex items-end justify-end text-[#7976FF]'>Mot de passe oublier?</Link>
             <div >
 
             <Button className='bg-[#7976FF]  w-full  hover:bg-purple-500 block' type="submit">Submit</Button>

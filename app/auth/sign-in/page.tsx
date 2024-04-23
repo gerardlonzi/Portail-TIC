@@ -27,7 +27,7 @@ const SignIn = () => {
         <div className='w-full p-5 md:p-10 lg:p-24'>
 
           <h2 className='text-3xl font-semibold'>Login</h2>
-          <p className='mt-10'>Vous avez pas un compte ? <Link className='text-[#7976FF] ml-3 ' href={"/register"}>creer un compte</Link> </p>
+          <p className='mt-10'>Vous avez pas un compte ? <Link className='text-[#7976FF] ml-3 ' href={"/auth/register"}>creer un compte</Link> </p>
           <div className='mt-10'>
             <Sign_in_form />
 

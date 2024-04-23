@@ -1,18 +1,18 @@
 import { getSession } from 'next-auth/react';
 import { NextApiRequest ,NextApiResponse} from 'next'
 import prisma from '@/lib/prisma';
-import { NextResponse } from 'next/server';
+
 
 
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse){
+    console.log(req.body)
     try {
         const session = await getSession({ req: req }) // Passer l'objet req correctement
         
         if (!session) {
-            return new NextResponse(JSON.stringify({message:"Vous n'êtes pas authentifié"}),{status:404})
+            return res.status(404).json({message:"Vous n'êtes pas authentifié"}) 
         }
-
         const email = session.user?.email;
 
         if (email) {
@@ -35,21 +35,19 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse){
                         userId: isUserData.id
                     },
                     data :data
-
-                    
                     
                 })
 
-                return new NextResponse(JSON.stringify({message : authVerified } ),{status:200}) 
+                return res.status(200).json({message:authVerified})  
             }
         } else {
             console.error("Cette adresse email n'existe pas")
-            return  new NextResponse(JSON.stringify({message : "Cette adresse email n'existe pas" }),{status:400}) 
+            return res.status(404).json({message:"Cette adresse email n'existe pas"})   
      
         }
     } catch (error) {
         console.error(error)
-        return new NextResponse(JSON.stringify({message : "Une erreur est survenue lors du traitement de votre requête" }),{status:500}) 
+        return res.status(500).json({message:"Une erreur est survenue lors du traitement de votre requête"})  
       
     }
 }

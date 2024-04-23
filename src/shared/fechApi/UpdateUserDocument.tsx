@@ -15,14 +15,14 @@ interface props {
 const UpdateUserDocument = async (data:props): Promise<any> => {
     
     try{
-        const response  = await axios.put('/api/UpdateUserDoc', data)
+        const response  = await axios.patch('/api/UpdateUserDoc', data)
                 console.log(response.data);
                 return  response.data
-        }
-        catch(err){
+    }
+    catch(err){
             console.error("une erreur est survenue lors de la mise a jour des donnees " + err)
            throw err
-        }
+    }
  
 }
 

@@ -58,7 +58,7 @@ const Navbar = () => {
 
   const { setTheme } = useTheme()
   return (
-    <div className='flex fixed w-full py-5 pr-16 bg-[#0b0b0b] z-40 top-0 items-center justify-between  '>
+    <div className='flex fixed w-full py-5 pr-16 dark:bg-[#0A0A0A] z-40 top-0 items-center justify-between  '>
       <div className="flex gap-5 ">
         <Link className='w-10 h-10 p-2  bg-[#7976FF] rounded-full' href={"/"} >SC</Link>
      
